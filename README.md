@@ -34,8 +34,32 @@ This project is a Spring Boot application for managing loads and their associate
 
 ---
 
+
+
+
 ## Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/LoadManagementSystem.git
+
+
+2. Navigate to the project directory:
+     ```bash
+   cd LoadManagementSystem
+
+3. Build the project:
+   ```bash
+   mvn clean install
+
+4. Run the application:
+      ```bash
+   mvn spring-boot:run
+
+
+5. Access the application at:
+   ```bash
+   http://localhost:8080
+
+
+   
