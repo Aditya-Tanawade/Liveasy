@@ -61,25 +61,442 @@ This project is a Spring Boot application for managing loads and their associate
    ```bash
    http://localhost:8080
 
-API Endpoints
-   1. Create a Load
-      URL: /load
-      Method: POST
-      Request Body:
-                  {
-              "facility": {
-                "loadingPoint": "Mumbai",
-                "unloadingPoint": "Delhi",
-                "loadingDate": "2025-03-21",
-                "unloadingDate": "2025-03-25"
-              },
-              "productType": "Electronics",
-              "truckType": "Container",
-              "noOfTrucks": 3,
-              "weight": 12000,
-              "comment": "Handle with care",
-              "shipperId": "SHIP123",
-              "date": "2025-03-20"
-            }
 
-   
+## API Endpoints
+
+### 1. Create a Load
+- **Method**: `POST`
+- **URL**: `/load`
+- **Request Body**:
+  ```json
+  {
+    "facility": {
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "loadId": 1,
+    "facility": {
+      "id": 1,
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X POST http://localhost:8080/load   -H "Content-Type: application/json"   -d '{
+    "facility": {
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }'
+  ```
+
+---
+
+### 2. Get All Loads
+- **Method**: `GET`
+- **URL**: `/load`
+- **Query Parameters** (Optional):
+  - `shipperId`: Filter loads by `shipperId`.
+  - `truckType`: Filter loads by `truckType`.
+  - `productType`: Filter loads by `productType`.
+  - `loadingPoint`: Filter loads by `loadingPoint`.
+  - `unloadingPoint`: Filter loads by `unloadingPoint`.
+
+- **Response**:
+  ```json
+  [
+    {
+      "loadId": 1,
+      "facility": {
+        "id": 1,
+        "loadingPoint": "Mumbai",
+        "unloadingPoint": "Delhi",
+        "loadingDate": "2025-03-21",
+        "unloadingDate": "2025-03-25"
+      },
+      "productType": "Electronics",
+      "truckType": "Container",
+      "noOfTrucks": 3,
+      "weight": 12000,
+      "comment": "Handle with care",
+      "shipperId": "SHIP123",
+      "date": "2025-03-20"
+    }
+  ]
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X GET "http://localhost:8080/load?shipperId=SHIP123&truckType=Container"
+  ```
+
+---
+
+### 3. Get a Load by ID
+- **Method**: `GET`
+- **URL**: `/load/{loadId}`
+
+- **Response**:
+  ```json
+  {
+    "loadId": 1,
+    "facility": {
+      "id": 1,
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X GET http://localhost:8080/load/1
+  ```
+
+---
+
+### 4. Update a Load
+- **Method**: `PUT`
+- **URL**: `/load/{loadId}`
+- **Request Body**:
+  ```json
+  {
+    "facility": {
+      "loadingPoint": "Pune",
+      "unloadingPoint": "Kolkata",
+      "loadingDate": "2025-03-22",
+      "unloadingDate": "2025-03-26"
+    },
+    "productType": "Furniture",
+    "truckType": "Open",
+    "noOfTrucks": 2,
+    "weight": 8000,
+    "comment": "Urgent",
+    "shipperId": "SHIP456",
+    "date": "2025-03-21"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "loadId": 1,
+    "facility": {
+      "id": 1,
+      "loadingPoint": "Pune",
+      "unloadingPoint": "Kolkata",
+      "loadingDate": "2025-03-22",
+      "unloadingDate": "2025-03-26"
+    },
+    "productType": "Furniture",
+    "truckType": "Open",
+    "noOfTrucks": 2,
+    "weight": 8000,
+    "comment": "Urgent",
+    "shipperId": "SHIP456",
+    "date": "2025-03-21"
+  }
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X PUT http://localhost:8080/load/1   -H "Content-Type: application/json"   -d '{
+    "facility": {
+      "loadingPoint": "Pune",
+      "unloadingPoint": "Kolkata",
+      "loadingDate": "2025-03-22",
+      "unloadingDate": "2025-03-26"
+    },
+    "productType": "Furniture",
+    "truckType": "Open",
+    "noOfTrucks": 2,
+    "weight": 8000,
+    "comment": "Urgent",
+    "shipperId": "SHIP456",
+    "date": "2025-03-21"
+  }'
+  ```
+
+---
+
+### 5. Delete a Load
+- **Method**: `DELETE`
+- **URL**: `/load/{loadId}`
+
+- **Response**:
+  - **Status Code**: `204 No Content`
+
+- **cURL Command**:
+  ```bash
+  curl -X DELETE http://localhost:8080/load/1
+  ```
+
+---
+
+## Technologies Used
+- Java 17
+- Spring Boot
+- Hibernate (JPA)
+- RESTful APIs
+
+---
+
+## Setup Instructions
+1. Clone the repository.
+2. Configure the database in `application.properties`.
+3. Run the project using your IDE or with `mvn spring-boot:run`.
+
+
+
+## API Endpoints
+
+### 1. Create a Load
+- **Method**: `POST`
+- **URL**: `/load`
+- **Request Body**:
+  ```json
+  {
+    "facility": {
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "loadId": 1,
+    "facility": {
+      "id": 1,
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X POST http://localhost:8080/load   -H "Content-Type: application/json"   -d '{
+    "facility": {
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }'
+  ```
+
+---
+
+### 2. Get All Loads
+- **Method**: `GET`
+- **URL**: `/load`
+- **Query Parameters** (Optional):
+  - `shipperId`: Filter loads by `shipperId`.
+  - `truckType`: Filter loads by `truckType`.
+  - `productType`: Filter loads by `productType`.
+  - `loadingPoint`: Filter loads by `loadingPoint`.
+  - `unloadingPoint`: Filter loads by `unloadingPoint`.
+
+- **Response**:
+  ```json
+  [
+    {
+      "loadId": 1,
+      "facility": {
+        "id": 1,
+        "loadingPoint": "Mumbai",
+        "unloadingPoint": "Delhi",
+        "loadingDate": "2025-03-21",
+        "unloadingDate": "2025-03-25"
+      },
+      "productType": "Electronics",
+      "truckType": "Container",
+      "noOfTrucks": 3,
+      "weight": 12000,
+      "comment": "Handle with care",
+      "shipperId": "SHIP123",
+      "date": "2025-03-20"
+    }
+  ]
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X GET "http://localhost:8080/load?shipperId=SHIP123&truckType=Container"
+  ```
+
+---
+
+### 3. Get a Load by ID
+- **Method**: `GET`
+- **URL**: `/load/{loadId}`
+
+- **Response**:
+  ```json
+  {
+    "loadId": 1,
+    "facility": {
+      "id": 1,
+      "loadingPoint": "Mumbai",
+      "unloadingPoint": "Delhi",
+      "loadingDate": "2025-03-21",
+      "unloadingDate": "2025-03-25"
+    },
+    "productType": "Electronics",
+    "truckType": "Container",
+    "noOfTrucks": 3,
+    "weight": 12000,
+    "comment": "Handle with care",
+    "shipperId": "SHIP123",
+    "date": "2025-03-20"
+  }
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X GET http://localhost:8080/load/1
+  ```
+
+---
+
+### 4. Update a Load
+- **Method**: `PUT`
+- **URL**: `/load/{loadId}`
+- **Request Body**:
+  ```json
+  {
+    "facility": {
+      "loadingPoint": "Pune",
+      "unloadingPoint": "Kolkata",
+      "loadingDate": "2025-03-22",
+      "unloadingDate": "2025-03-26"
+    },
+    "productType": "Furniture",
+    "truckType": "Open",
+    "noOfTrucks": 2,
+    "weight": 8000,
+    "comment": "Urgent",
+    "shipperId": "SHIP456",
+    "date": "2025-03-21"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "loadId": 1,
+    "facility": {
+      "id": 1,
+      "loadingPoint": "Pune",
+      "unloadingPoint": "Kolkata",
+      "loadingDate": "2025-03-22",
+      "unloadingDate": "2025-03-26"
+    },
+    "productType": "Furniture",
+    "truckType": "Open",
+    "noOfTrucks": 2,
+    "weight": 8000,
+    "comment": "Urgent",
+    "shipperId": "SHIP456",
+    "date": "2025-03-21"
+  }
+  ```
+- **cURL Command**:
+  ```bash
+  curl -X PUT http://localhost:8080/load/1   -H "Content-Type: application/json"   -d '{
+    "facility": {
+      "loadingPoint": "Pune",
+      "unloadingPoint": "Kolkata",
+      "loadingDate": "2025-03-22",
+      "unloadingDate": "2025-03-26"
+    },
+    "productType": "Furniture",
+    "truckType": "Open",
+    "noOfTrucks": 2,
+    "weight": 8000,
+    "comment": "Urgent",
+    "shipperId": "SHIP456",
+    "date": "2025-03-21"
+  }'
+  ```
+
+---
+
+### 5. Delete a Load
+- **Method**: `DELETE`
+- **URL**: `/load/{loadId}`
+
+- **Response**:
+  - **Status Code**: `204 No Content`
+
+- **cURL Command**:
+  ```bash
+  curl -X DELETE http://localhost:8080/load/1
+  ```
+---
+
+## Setup Instructions
+1. Clone the repository.
+2. Configure the database in `application.properties`.
+3. Run the project using your IDE or with `mvn spring-boot:run`
