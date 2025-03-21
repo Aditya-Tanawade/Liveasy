@@ -19,7 +19,8 @@ This project is a Spring Boot application for managing loads and their associate
 - **Java**: Core programming language.
 - **Spring Boot**: Framework for developing REST APIs.
 - **Hibernate**: ORM tool for database interactions.
-- **H2 Database**: Lightweight database for development.
+- **JPA**: Java Persistance API .
+- **PostgreSQL Database**: Relational database for development.
 - **Lombok**: Reduces boilerplate code.
 - **Maven**: Dependency management.
 
@@ -27,7 +28,7 @@ This project is a Spring Boot application for managing loads and their associate
 
 ## Prerequisites
 
-- Java 17+
+- Java 21+
 - Maven 3+
 - IDE (e.g., IntelliJ, Eclipse)
 - Postman (for testing APIs)
@@ -56,10 +57,29 @@ This project is a Spring Boot application for managing loads and their associate
       ```bash
    mvn spring-boot:run
 
-
 5. Access the application at:
    ```bash
    http://localhost:8080
 
+API Endpoints
+   1. Create a Load
+      URL: /load
+      Method: POST
+      Request Body:
+                  {
+              "facility": {
+                "loadingPoint": "Mumbai",
+                "unloadingPoint": "Delhi",
+                "loadingDate": "2025-03-21",
+                "unloadingDate": "2025-03-25"
+              },
+              "productType": "Electronics",
+              "truckType": "Container",
+              "noOfTrucks": 3,
+              "weight": 12000,
+              "comment": "Handle with care",
+              "shipperId": "SHIP123",
+              "date": "2025-03-20"
+            }
 
    
